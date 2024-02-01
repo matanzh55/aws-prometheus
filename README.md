@@ -5,10 +5,10 @@ Deploy Prometheus on a centralized server:
 * Create an ec2 instnace of ubuntu - "prometheus_server"
 * Create with the instance security group with inbound rules of ports: 80, 22, 9090, 9100, 9093  and associate it with the prometheus_server.
 * In the prometheus_server type the commands:
-'''
+```
 sudo apt-get update
 sudo apt-get install prometheus
-'''
+```
 *Edit the Prometheus configuration file (/etc/prometheus/prometheus.yml) to include the EC2 Auto Discovery settings. 
 Open the configuration file in a text editor:
 '''
