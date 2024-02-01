@@ -1,0 +1,16 @@
+groups:
+  - name: uptime_alerts
+    rules:
+      - alert: InstanceDown
+        expr: up == 0
+        for: 5m
+        annotations:
+          summary: "Instance {{ $labels.instance }} down"
+          description: "The instance {{ $labels.instance }} has been unreachable for more than 5 minutes."
+
+      - alert: HighDowntime
+        expr: up == 0
+        for: 1h
+        annotations:
+          summary: "High downtime on instance {{ $labels.instance }}"
+          description: "The instance {{ $labels.instance }} has experienced significant downtime (more than 1 hour)."
