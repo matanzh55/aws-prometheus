@@ -9,12 +9,12 @@ Deploy Prometheus on a centralized server:
 sudo apt-get update
 sudo apt-get install prometheus
 ```
-*Edit the Prometheus configuration file (/etc/prometheus/prometheus.yml) to include the EC2 Auto Discovery settings. 
+* Edit the Prometheus configuration file (/etc/prometheus/prometheus.yml) to include the EC2 Auto Discovery settings. 
 Open the configuration file in a text editor:
 ```
 sudo nano /etc/prometheus/prometheus.yml
 ```
-*Add the following EC2 service discovery configuration to the file:
+* Add the following EC2 service discovery configuration to the file:
 ```
 - job_name: 'ec2_auto_discovery'
     ec2_sd_configs:
@@ -28,8 +28,8 @@ sudo nano /etc/prometheus/prometheus.yml
 ```
 
 ## 2. Node Exporter Deployment:
-*Create ec2 instance/s and associated them with the security group of the prometheus_server.
-* In the instance/s type the commands:
+Create ec2 instance/s and associated them with the security group of the prometheus_server.
+In the instance/s type the commands:
 ```
 wget https://github.com/prometheus/node_exporter/releases/download/v1.2.2/node_exporter-1.2.2.linux-amd64.tar.gz
 tar xvfz node_exporter-1.2.2.linux-amd64.tar.gz
@@ -37,7 +37,7 @@ sudo cp node_exporter-1.2.2.linux-amd64/node_exporter /usr/local/bin/
 rm -rf node_exporter-1.2.2.linux-amd64.tar.gz node_exporter-1.2.2.linux-amd64
 nohup node_exporter &
 ```
-* Verify Prometheus Collects Node Exporter Metrics:
+Verify Prometheus Collects Node Exporter Metrics:
 Access the Prometheus web UI (http://<your-prometheus-server-ip>:9090) and use the Prometheus expression browser
 to query Node Exporter metrics, for example: "up".  This should return a list of instances reporting as "up," indicating that Prometheus is successfully collecting metrics from Node Exporter on your EC2 instances.
 
@@ -46,7 +46,7 @@ to query Node Exporter metrics, for example: "up".  This should return a list of
 Now, Prometheus should automatically discover and monitor any new EC2 instances based on the configured EC2 Auto Discovery. To verify this:
 Launch a new EC2 instance in your AWS environment.
 After a short time, check the Prometheus web UI to confirm that the new instance appears in the list of targets.
-* Check Prometheus Targets:
+Check Prometheus Targets:
 Access the Prometheus web UI, and navigate to the "Status" -> "Targets" page. Look for the job named 'ec2_auto_discovery'. 
 It should show the new EC2 instance as a target, and the status should be "UP."
 
