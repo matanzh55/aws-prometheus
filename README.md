@@ -1,4 +1,4 @@
-Simple Uptime Monitoring with Prometheus, EC2 Auto Discovery, and Discord Alerts
+#Simple Uptime Monitoring with Prometheus, EC2 Auto Discovery, and Discord Alerts
 1. Prometheus Setup:
 Deploy Prometheus on a centralized server:
 
